@@ -1,14 +1,13 @@
-from email.mime import application
 from flask import Flask,render_template,request,jsonify
 import pandas as pd
 import numpy as np 
 import joblib
 
-application = Flask(__name__)
+app = Flask(__name__)
 
 model = joblib.load('spam_model.pkl','r')
 
-@application.route('/',methods=['GET', 'POST'])
+@app.route('/',methods=['GET', 'POST'])
 def index():
   if request.method == 'POST':
     message = request.form.get('message')
@@ -24,4 +23,4 @@ def index():
 
 
 if __name__ == '__main__':
-    application.run(debug=True, port=8000)
+    app.run(debug=True, port=8000)
